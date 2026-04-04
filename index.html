@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Rail Rush 3D</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── START SCREEN ── -->
+  <div id="start-screen" class="screen active">
+    <div class="screen-inner">
+      <div class="logo-wrap">
+        <div class="logo-track"></div>
+        <h1 class="logo-title">RAIL RUSH</h1>
+        <div class="logo-subtitle">3D ENDLESS RUNNER</div>
+        <h2>Nikhil Kumar</h2>
+      </div>
+      <div class="instructions">
+        <div class="inst-row"><span class="key">←→</span><span>Change Lane</span></div>
+        <div class="inst-row"><span class="key">↑</span><span>Jump</span></div>
+        <div class="inst-row"><span class="key">↓</span><span>Roll</span></div>
+        <div class="inst-row"><span class="key">swipe</span><span>Mobile Controls</span></div>
+      </div>
+      <button id="btn-start" class="btn-main">▶ &nbsp;PLAY</button>
+    </div>
+  </div>
+
+  <!-- ── HUD ── -->
+  <div id="hud" class="hidden">
+    <div class="hud-left">
+      <div class="hud-label">SCORE</div>
+      <div id="hud-score" class="hud-value">0</div>
+    </div>
+    <div class="hud-right">
+      <div class="hud-label">COINS</div>
+      <div id="hud-coins" class="hud-value">🪙 0</div>
+    </div>
+    <div class="speed-bar-wrap">
+      <div id="speed-bar" class="speed-bar"></div>
+    </div>
+  </div>
+
+  <!-- ── GAME OVER SCREEN ── -->
+  <div id="gameover-screen" class="screen">
+    <div class="screen-inner">
+      <h2 class="go-title">GAME OVER</h2>
+      <div class="go-stats">
+        <div class="go-row"><span>Score</span><span id="go-score">0</span></div>
+        <div class="go-row"><span>Coins</span><span id="go-coins">0</span></div>
+        <div class="go-row"><span>Best</span><span id="go-best">0</span></div>
+      </div>
+      <button id="btn-restart" class="btn-main">↺ &nbsp;RESTART</button>
+    </div>
+  </div>
+
+  <!-- ── CANVAS ── -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
