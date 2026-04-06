@@ -24,7 +24,7 @@ const LANES       = [-LANE_W, 0, LANE_W];   // world-X for lanes 0,1,2
 const TILE_LEN    = 40;
 const TILE_N      = 7;
 const BASE_SPD    = 15;
-const MAX_SPD     = 38;
+const MAX_SPD     = 50;
 const GRAVITY     = -34;          // strong → snappy arc like Subway Surfers
 const JUMP_V      = 14.0;         // initial upward velocity
 const LANE_LERP   = 0.15;         // lateral interpolation per frame
@@ -933,7 +933,7 @@ function loop(now) {
 
 function tick(dt) {
   // Speed ramp (distance-based, not time-based)
-  gameSpeed = Math.min(MAX_SPD, BASE_SPD + score * 0.035);
+  gameSpeed = Math.min(MAX_SPD, BASE_SPD + score * 0.075);
   dist      += gameSpeed * dt;
   score     += gameSpeed * dt * 0.55;
   updateHUD();
@@ -1027,11 +1027,13 @@ function tick(dt) {
 
   let trainRate;
   if (score < 1000) {
-    trainRate = 3;       // start
-} else if (score < 3000) {
-    trainRate = 1.5;       // mid game
+    trainRate = 0.5;       // start
+} else if (score < 2000) {
+    trainRate = 0.3;       // mid game
+} else if(score < 3000) {
+  trainRate = 0.1;       // hard mode 😈
 } else {
-  trainRate = 1;       // hard mode 😈
+  trainRate = 0.01;       // hard mode 😈
 }
   if (trainTimer <= 0) {
     trainTimer = trainRate + Math.random() * 3;
