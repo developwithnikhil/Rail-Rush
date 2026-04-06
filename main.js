@@ -933,7 +933,7 @@ function loop(now) {
 
 function tick(dt) {
   // Speed ramp (distance-based, not time-based)
-  gameSpeed  = Math.min(MAX_SPD, BASE_SPD + dist * 0.009);
+  gameSpeed = Math.min(MAX_SPD, BASE_SPD + score * 0.035);
   dist      += gameSpeed * dt;
   score     += gameSpeed * dt * 0.55;
   updateHUD();
@@ -1025,7 +1025,14 @@ function tick(dt) {
     spawnCoins(-20);
   }
 
-  const trainRate = Math.max(5.5, 20 - dist * 0.0005);
+  let trainRate;
+  if (score < 1000) {
+    trainRate = 3;       // start
+} else if (score < 3000) {
+    trainRate = 1.5;       // mid game
+} else {
+  trainRate = 1;       // hard mode 😈
+}
   if (trainTimer <= 0) {
     trainTimer = trainRate + Math.random() * 3;
     spawnTrain(SPAWN_Z);
