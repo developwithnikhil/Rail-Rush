@@ -1,65 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
   <title>Rail Rush 3D</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- ── START SCREEN ── -->
-  <div id="start-screen" class="screen active">
-    <div class="screen-inner">
-      <div class="logo-wrap">
-        <div class="logo-track"></div>
-        <h1 class="logo-title">RAIL RUSH</h1>
-        <div class="logo-subtitle">3D ENDLESS RUNNER</div>
-        <h2>Nikhil Kumar</h2>
-      </div>
-      <div class="instructions">
-        <div class="inst-row"><span class="key">←→</span><span>Change Lane</span></div>
-        <div class="inst-row"><span class="key">↑</span><span>Jump</span></div>
-        <div class="inst-row"><span class="key">↓</span><span>Roll</span></div>
-        <div class="inst-row"><span class="key">swipe</span><span>Mobile Controls</span></div>
-      </div>
-      <button id="btn-start" class="btn-main">▶ &nbsp;PLAY</button>
+<!-- ══════════════ START / LEVEL SELECT SCREEN ══════════════ -->
+<div id="start-screen" class="screen active">
+  <div class="screen-inner wide">
+    <div class="logo-wrap">
+      <div class="logo-track-bar"></div>
+      <h1 class="logo-title">RAIL RUSH</h1>
+      <div class="logo-sub">3D ENDLESS RUNNER</div>
+    </div>
+
+    <div class="level-grid">
+      <button class="lvl-btn" data-level="easy">
+        <span class="lvl-icon">🟢</span>
+        <span class="lvl-name">EASY</span>
+        <span class="lvl-desc">Slow start · Few obstacles</span>
+      </button>
+      <button class="lvl-btn" data-level="medium">
+        <span class="lvl-icon">🟡</span>
+        <span class="lvl-name">MEDIUM</span>
+        <span class="lvl-desc">Balanced challenge</span>
+      </button>
+      <button class="lvl-btn" data-level="hard">
+        <span class="lvl-icon">🔴</span>
+        <span class="lvl-name">HARD</span>
+        <span class="lvl-desc">Fast · Dense obstacles</span>
+      </button>
+      <button class="lvl-btn" data-level="extreme">
+        <span class="lvl-icon">💀</span>
+        <span class="lvl-name">EXTREME</span>
+        <span class="lvl-desc">Chaos mode · Good luck!</span>
+      </button>
+    </div>
+
+    <div class="controls-row">
+      <span class="key">← →</span><span>Lane</span>
+      <span class="key">↑</span><span>Jump</span>
+      <span class="key">↓</span><span>Roll</span>
+      <span class="key">swipe</span><span>Mobile</span>
     </div>
   </div>
+</div>
 
-  <!-- ── HUD ── -->
-  <div id="hud" class="hidden">
-    <div class="hud-left">
-      <div class="hud-label">SCORE</div>
-      <div id="hud-score" class="hud-value">0</div>
+<!-- ══════════════ HUD ══════════════ -->
+<div id="hud" class="hidden">
+  <div class="hud-left">
+    <div class="hud-lbl">SCORE</div>
+    <div id="hud-score" class="hud-val">0</div>
+  </div>
+  <div class="hud-center">
+    <div id="hud-level-badge" class="level-badge easy">EASY</div>
+    <div class="speed-bar-wrap"><div id="speed-bar" class="speed-bar"></div></div>
+    <div id="sky-label" class="sky-lbl"></div>
+  </div>
+  <div class="hud-right">
+    <div class="hud-lbl">COINS</div>
+    <div id="hud-coins" class="hud-val">🪙 0</div>
+  </div>
+  <!-- Costume button -->
+  <button id="btn-costume" class="costume-btn" title="Change Costume">👕</button>
+</div>
+
+<!-- ══════════════ COSTUME PANEL ══════════════ -->
+<div id="costume-panel" class="costume-panel hidden">
+  <div class="cp-header">
+    <span>CUSTOMIZE</span>
+    <button id="btn-cp-close">✕</button>
+  </div>
+  <div class="cp-section-title">OUTFIT COLOR</div>
+  <div class="cp-colors" id="cp-outfit">
+    <button class="cc-btn active" data-type="outfit" data-color="0xff4e6a" style="background:#ff4e6a"></button>
+    <button class="cc-btn" data-type="outfit" data-color="0x4488ff" style="background:#4488ff"></button>
+    <button class="cc-btn" data-type="outfit" data-color="0x22cc66" style="background:#22cc66"></button>
+    <button class="cc-btn" data-type="outfit" data-color="0xaa44ff" style="background:#aa44ff"></button>
+    <button class="cc-btn" data-type="outfit" data-color="0xff8800" style="background:#ff8800"></button>
+    <button class="cc-btn" data-type="outfit" data-color="0xffffff" style="background:#ffffff"></button>
+  </div>
+  <div class="cp-section-title">SKIN TONE</div>
+  <div class="cp-colors" id="cp-skin">
+    <button class="cc-btn active" data-type="skin" data-color="0xf5c842" style="background:#f5c842"></button>
+    <button class="cc-btn" data-type="skin" data-color="0xffdaaa" style="background:#ffdaaa"></button>
+    <button class="cc-btn" data-type="skin" data-color="0xc68642" style="background:#c68642"></button>
+    <button class="cc-btn" data-type="skin" data-color="0x8d5524" style="background:#8d5524"></button>
+    <button class="cc-btn" data-type="skin" data-color="0xffc0cb" style="background:#ffc0cb"></button>
+  </div>
+  <div class="cp-section-title">SHINE / MATERIAL</div>
+  <div class="cp-shines" id="cp-shine">
+    <button class="cs-btn active" data-shine="matte">MATTE</button>
+    <button class="cs-btn" data-shine="glossy">GLOSSY</button>
+    <button class="cs-btn" data-shine="neon">NEON</button>
+    <button class="cs-btn" data-shine="gold">GOLD</button>
+  </div>
+</div>
+
+<!-- ══════════════ GAME OVER ══════════════ -->
+<div id="gameover-screen" class="screen">
+  <div class="screen-inner">
+    <div class="go-title">GAME OVER</div>
+    <div class="go-stats">
+      <div class="go-row"><span>Score</span><span id="go-score">0</span></div>
+      <div class="go-row"><span>Coins</span><span id="go-coins">0</span></div>
+      <div class="go-row"><span>Best</span><span id="go-best">0</span></div>
+      <div class="go-row"><span>Level</span><span id="go-level">Easy</span></div>
     </div>
-    <div class="hud-right">
-      <div class="hud-label">COINS</div>
-      <div id="hud-coins" class="hud-value">🪙 0</div>
-    </div>
-    <div class="speed-bar-wrap">
-      <div id="speed-bar" class="speed-bar"></div>
+    <div class="go-btns">
+      <button id="btn-restart" class="btn-main">↺ RESTART</button>
+      <button id="btn-menu" class="btn-sec">⌂ MENU</button>
     </div>
   </div>
+</div>
 
-  <!-- ── GAME OVER SCREEN ── -->
-  <div id="gameover-screen" class="screen">
-    <div class="screen-inner">
-      <h2 class="go-title">GAME OVER</h2>
-      <div class="go-stats">
-        <div class="go-row"><span>Score</span><span id="go-score">0</span></div>
-        <div class="go-row"><span>Coins</span><span id="go-coins">0</span></div>
-        <div class="go-row"><span>Best</span><span id="go-best">0</span></div>
-      </div>
-      <button id="btn-restart" class="btn-main">↺ &nbsp;RESTART</button>
-    </div>
-  </div>
+<!-- ══════════════ DAY/NIGHT TRANSITION ══════════════ -->
+<div id="sky-overlay" class="sky-overlay"></div>
+<!-- ══════════════ CRASH FLASH ══════════════ -->
+<div id="crash-overlay"></div>
 
-  <!-- ── CANVAS ── -->
-  <canvas id="game-canvas"></canvas>
+<canvas id="game-canvas"></canvas>
 
-  <!-- Three.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
